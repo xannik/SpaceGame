@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
             Debug.Log("Player == null");
         else
         {
-
+                
         }
 	}
 }

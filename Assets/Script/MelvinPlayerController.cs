@@ -6,8 +6,8 @@ public class MelvinPlayerController : MonoBehaviour {
 
     public float speed = 10f;
     public float speedChange = 10f;
-    public float speedMax = 50f;
-    public float speedMin = -50f;
+    public float speedMax = 300f;
+    public float speedMin = 0f;
     public float turnSpeed = 2f;
     public float RotateSpeed = 1.5f;
     public float fireRate = 0.5f;
@@ -25,6 +25,8 @@ public class MelvinPlayerController : MonoBehaviour {
             transform.Rotate(new Vector3(1, 0, 0), turnSpeed);
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             transform.Rotate(new Vector3(-1, 0, 0), turnSpeed);
+        GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        Debug.Log(GetComponent<Rigidbody>().velocity);
     }
 
     void changeSpeed()
@@ -44,12 +46,13 @@ public class MelvinPlayerController : MonoBehaviour {
             GameObject go = GameObject.Instantiate(shotPrefab, transform.position, transform.rotation) as GameObject;
             GameObject.Destroy(go, 3f);
         }
-        GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        
     }*/
 
-    void FixedUpdate() {
-        movement();
+    void FixedUpdate()
+    {
         changeSpeed();
+        movement();
         //shoot();
     }
 }
