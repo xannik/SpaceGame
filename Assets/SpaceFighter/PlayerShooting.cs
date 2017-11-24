@@ -12,7 +12,6 @@ public class PlayerShooting : MonoBehaviour {
 
     void Start () {
 
-       
 	}
 	
 	// Update is called once per frame
@@ -22,7 +21,7 @@ public class PlayerShooting : MonoBehaviour {
 
         if(Input.GetButton("Fire1") && cooldownTimer <= 0)
         {
-            Debug.Log("Pew!");
+           // Debug.Log("Pew!");
             cooldownTimer = fireDelay;
             Instantiate(bulletPreFab, transform.position, transform.rotation);
         }
