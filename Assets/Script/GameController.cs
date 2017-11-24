@@ -11,10 +11,23 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
+        if (enemy_prefab == null)
+            throw new System.Exception("Enemy prefab is missing");
     }
-	 
+	
+    void wavesSpawner()
+    {
+        if (Time.time > 10 && wave_counter == 0)
+        {
+            wave_counter++;
+            for (int i = 0; i < 20; i++)
+            {
 
+            }
+        }
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -22,7 +35,7 @@ public class GameController : MonoBehaviour {
             Debug.Log("Player == null");
         else
         {
-                
+            wavesSpawner();
         }
 	}
 }

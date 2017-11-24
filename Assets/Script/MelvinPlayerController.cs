@@ -26,7 +26,6 @@ public class MelvinPlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             transform.Rotate(new Vector3(-1, 0, 0), turnSpeed);
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
-        Debug.Log(GetComponent<Rigidbody>().velocity);
     }
 
     void changeSpeed()

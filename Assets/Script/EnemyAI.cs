@@ -13,6 +13,14 @@ public class EnemyAI : MonoBehaviour {
 
     private float nextFire = 0.0F;
 
+    void Start()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
+
     void ShootPlayer()
     {
         Vector3 relativePoint = transform.InverseTransformPoint(player.transform.position);
@@ -23,9 +31,13 @@ public class EnemyAI : MonoBehaviour {
             relativePoint.x > -5.0 &&
             Time.time > nextFire)
         {
-            nextFire = Time.time + fireRate;
-            GameObject go = GameObject.Instantiate(shotPrefab, transform.position, transform.rotation) as GameObject;
-            GameObject.Destroy(go, 3f);
+            if (shotPrefab == null)
+                Debug.Log("SHotPrefab == null");
+            else {
+                nextFire = Time.time + fireRate;
+                GameObject go = GameObject.Instantiate(shotPrefab, transform.position, transform.rotation) as GameObject;
+                GameObject.Destroy(go, 3f);
+            }
         }
     }
 
