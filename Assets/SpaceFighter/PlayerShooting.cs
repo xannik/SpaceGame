@@ -18,7 +18,7 @@ public class PlayerShooting : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         cooldownTimer -= Time.deltaTime;
-        Debug.Log(Input.GetButton("Fire1"));
+      //  Debug.Log(Input.GetButton("Fire1"));
 
         if(Input.GetButton("Fire1") && cooldownTimer <= 0)
         {

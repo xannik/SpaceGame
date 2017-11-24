@@ -17,11 +17,11 @@ public class MelvinPlayerController : MonoBehaviour {
 
     void movement()
     {
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             transform.Rotate(new Vector3(0, 0, 1), RotateSpeed);
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             transform.Rotate(new Vector3(0, 0, -1), RotateSpeed);
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             transform.Rotate(new Vector3(1, 0, 0), turnSpeed);
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             transform.Rotate(new Vector3(-1, 0, 0), turnSpeed);
@@ -36,7 +36,7 @@ public class MelvinPlayerController : MonoBehaviour {
         speed = (speed > speedMax ? speedMax : (speed < speedMin ? speedMin : speed));
     }
         
-    void shoot()
+    /*void shoot()
     {
         if (Input.GetKey(KeyCode.Space) && Time.time > nextFire)
         {
@@ -45,11 +45,11 @@ public class MelvinPlayerController : MonoBehaviour {
             GameObject.Destroy(go, 3f);
         }
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
-    }
+    }*/
 
     void FixedUpdate() {
         movement();
         changeSpeed();
-        shoot();
+        //shoot();
     }
 }
