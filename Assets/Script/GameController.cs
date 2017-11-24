@@ -15,16 +15,17 @@ public class GameController : MonoBehaviour {
             player = GameObject.FindGameObjectWithTag("Player");
         if (enemy_prefab == null)
             throw new System.Exception("Enemy prefab is missing");
+        Random.InitState((int)System.DateTime.Now.Ticks);
     }
 	
     void wavesSpawner()
     {
-        if (Time.time > 10 && wave_counter == 0)
+        if (wave_counter == 0)
         {
             wave_counter++;
             for (int i = 0; i < 20; i++)
             {
-
+                GameObject.Instantiate(enemy_prefab, Random.insideUnitSphere * 1000, Random.rotationUniform);
             }
         }
     }
