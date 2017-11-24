@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour {
-    public GameObject player;       //Public variable to store a reference to the player game object
-    public GameObject shotPrefab;
+    public GameObject player = null;       //Public variable to store a reference to the player game object
+    public GameObject shotPrefab = null;
     public float speed = 10f;
     public float turnspeed = 1.5f;
     public float fireRate = 0.5F;
@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour {
     {
         Vector3 relativePoint = transform.InverseTransformPoint(player.transform.position);
 
-        Debug.Log(relativePoint.x);
+        //Debug.Log(relativePoint.x);
 
         if (relativePoint.x < 5.0 &&
             relativePoint.x > -5.0 &&
@@ -73,9 +73,14 @@ public class EnemyAI : MonoBehaviour {
     }
 
     void Update() {
-        //rotateToPlayer();
-        pathFinding();
-        moveForward();
-        ShootPlayer();
+        if (player != null)
+        {
+            pathFinding();
+            moveForward();
+            ShootPlayer();
+        }
+        else
+            Debug.Log("Player == null");
+
     }
 }
