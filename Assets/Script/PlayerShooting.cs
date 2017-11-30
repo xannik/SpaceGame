@@ -5,14 +5,13 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour {
 
     // Use this for initialization
-
-    public GameObject bulletPreFab;
+    public GameObject BulletPreFab;
     public float fireDelay = 0.25f;
+    
+   
+    //public GameObject shootspawn;
+
     private float cooldownTimer = 0;
-
-    void Start () {
-
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,9 +20,17 @@ public class PlayerShooting : MonoBehaviour {
 
         if(Input.GetButton("Fire1") && cooldownTimer <= 0)
         {
-           // Debug.Log("Pew!");
-            cooldownTimer = fireDelay;
-            Instantiate(bulletPreFab, transform.position, transform.rotation);
+            
+            Shoot();
         }
+      
 	}
+    void Shoot()
+    {
+        Debug.Log("Pew!");
+        cooldownTimer = fireDelay;
+        Instantiate(BulletPreFab, transform.position, transform.rotation);
+
+
+    }
 }
