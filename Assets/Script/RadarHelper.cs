@@ -25,6 +25,5 @@ public class RadarHelper : MonoBehaviour {
 	void onDestroy() {
 		
 		Destroy (enemyDot);
-
 	}
 }

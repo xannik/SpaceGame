@@ -1,4 +1,4 @@
-﻿//#define HEALTH_SCRIPT_EXISTS
+﻿#define HEALTH_SCRIPT_EXISTS
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 	private Transform shieldLeft, shieldRight, healthLeft, healthRight;
 
-	public GameObject shieldTextObject, healthTextObject;
+	public GameObject shieldTextObject, healthTextObject, player;
 
 	private Component healthScript;
 
@@ -25,8 +25,8 @@ public class HealthShieldIndicator : MonoBehaviour {
 	void Start () {
 
 		#if HEALTH_SCRIPT_EXISTS
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		healthScript = player.GetComponent<HealthController> ();
+		player = GameObject.FindGameObjectWithTag("Player");
+//		healthScript = player.GetComponent<HealthController> ();
 		#endif
 
 		shieldLeft = transform.GetChild (0).GetChild (0);
@@ -48,7 +48,7 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 	private void updateShield () {
 		#if HEALTH_SCRIPT_EXISTS
-		int shield = healthScript.currentShield ();
+		int shield = player.GetComponent<HealthController>().currentShield;
 		#else
 		int shield = 25;
 		#endif
@@ -59,7 +59,7 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 	private void updateHealth () {
 		#if HEALTH_SCRIPT_EXISTS
-		int health = healthScript.currentHealth ();
+		int health = player.GetComponent<HealthController>().currentHealth;
 		#else
 		int health = 75;
 		#endif

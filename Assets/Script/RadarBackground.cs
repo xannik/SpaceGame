@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System.Linq;
+using System.Linq;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class RadarBackground : MonoBehaviour {
 
 	private GameObject player;
 
-//	private float x;
+	private const float t = 1.0f;
+	private const float r = 1.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -18,71 +19,27 @@ public class RadarBackground : MonoBehaviour {
 			player = GameObject.FindGameObjectWithTag("Player");
 		}
 
-//		var mesh = (transform.GetComponent("MeshFilter") as MeshFilter).mesh;
-//		mesh.uv = mesh.uv.Select(o => new Vector2(1 - o.x, o.y)).ToArray();
-//		mesh.triangles = mesh.triangles.Reverse().ToArray();
-//		mesh.normals = mesh.normals.Select(o => -o).ToArray();
-//
-//		x = 0.0f;
 
+		Mesh mesh = transform.GetComponent<MeshFilter> ().sharedMesh;
+//		var mesh = (transform.GetComponent("MeshFilter") as MeshFilter).mesh; // original line, creates runtime error
+
+		mesh.uv = mesh.uv.Select(o => new Vector2(1 - o.x, o.y)).ToArray();
+		mesh.triangles = mesh.triangles.Reverse().ToArray();
+		mesh.normals = mesh.normals.Select(o => -o).ToArray();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+//		transform.rotation = player.transform.rotation;
 
-		transform.localRotation = player.transform.localRotation;
-
-//		Vector3 pr = player.transform.rotation.eulerAngles;
-
-//		Vector3 tr = transform.localRotation.eulerAngles;
-
-//		tr.z = tr.z - pr.z;
-
-//		Quaternion q = transform.rotation;
-
-//		q.eulerAngles = new Vector3 (x, 0, 0);
-
-//		q.eulerAngles.Set (x, 0, 0);
-
-
-//		x = -player.transform.rotation.eulerAngles.z;
-
-//		transform.rotation = Quaternion.AngleAxis(-player.transform.localRotation.eulerAngles.x, transform.up);
-
-//		transform.rotation = Quaternion.AngleAxis(-player.transform.localRotation.eulerAngles.y, transform.right);
-
-//		transform.rotation = Quaternion.AngleAxis(-player.transform.rotation.eulerAngles.z, Vector3.forward);
-
-
-
-//		transform.Rotate (new Vector3 (x, y, z)); // = new Quaternion (x, 0, 0, 0);
-
-
-//		x += 1.0f;
-
-//		Quaternion p = player.transform.rotation;
-//
-//		Quaternion s = transform.rotation;
-//
-
-//
-
-//		Vector3 pr = p.eulerAngles;
-//
-//		Vector3 sr = s.eulerAngles;
-//
-//		sr = -pr;
-
-//		transform.rotation = Quaternion.FromToRotation (-sr, pr);
-
-//		Quaternion p = player.transform.rotation;
-//
-//		Vector3 pr = p.eulerAngles;
-//
-//		transform.rotation.eulerAngles.Set ();
-
-//		transform.localRotation = Quaternion.FromToRotation (transform.rotation.eulerAngles, player.transform.rotation.eulerAngles);
-
-//		transform.Rotate(new Vector3(1.0f,0,0));
+		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+			transform.Rotate(new Vector3(0, 0, -1), r, Space.World);
+		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+			transform.Rotate(new Vector3(0, 0, 1), r, Space.World);
+		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+			transform.Rotate(new Vector3(-1, 0, 0), t, Space.World);
+		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+			transform.Rotate(new Vector3(1, 0, 0), t, Space.World);
+		
 	}
 }
