@@ -1,6 +1,4 @@
-﻿#define HEALTH_SCRIPT_EXISTS
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,19 +13,16 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 	private Transform shieldLeft, shieldRight, healthLeft, healthRight;
 
-	public GameObject shieldTextObject, healthTextObject, player;
+	public GameObject shieldTextObject, healthTextObject;
 
-	private Component healthScript;
+	private HealthController healthScript;
 
 	private Text shieldText, healthText;
 
-	// Use this for initialization
 	void Start () {
 
-		#if HEALTH_SCRIPT_EXISTS
-		player = GameObject.FindGameObjectWithTag("Player");
-//		healthScript = player.GetComponent<HealthController> ();
-		#endif
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		healthScript = player.GetComponent<HealthController> ();
 
 		shieldLeft = transform.GetChild (0).GetChild (0);
 		shieldRight = transform.GetChild (1).GetChild (0);
@@ -40,29 +35,27 @@ public class HealthShieldIndicator : MonoBehaviour {
 		factor = (180.0f - angleOffset) / VALUE_MAX;
 	}
 
-	// Update is called once per frame
 	void Update () {
+		
 		updateShield ();
 		updateHealth ();
 	}
 
 	private void updateShield () {
-		#if HEALTH_SCRIPT_EXISTS
-		int shield = player.GetComponent<HealthController>().currentShield;
-		#else
-		int shield = 25;
-		#endif
+		
+		int shield = healthScript.currentShield;
+
+		shield = clamp (shield);
 
 		shieldText.text = shield.ToString ();
 		setShieldRotation (angleOffset + (VALUE_MAX - shield) * factor);
 	}
 
 	private void updateHealth () {
-		#if HEALTH_SCRIPT_EXISTS
-		int health = player.GetComponent<HealthController>().currentHealth;
-		#else
-		int health = 75;
-		#endif
+		
+		int health = healthScript.currentHealth;
+
+		health = clamp (health);
 
 		healthText.text = health.ToString ();
 		setHealthRotation (angleOffset + (VALUE_MAX - health) * factor);
@@ -72,12 +65,16 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 		shieldLeft.rotation = Quaternion.AngleAxis(-angle, shieldLeft.forward);
 		shieldRight.rotation = Quaternion.AngleAxis(angle, shieldRight.forward);
-
 	}
 
 	private void setHealthRotation (float angle) {
 
 		healthLeft.rotation = Quaternion.AngleAxis(-angle, healthLeft.forward);
 		healthRight.rotation = Quaternion.AngleAxis(angle, healthRight.forward);
+	}
+
+	private int clamp (int value) {
+
+		return value > VALUE_MAX ? VALUE_MAX : value < 0 ? 0 : value;
 	}
 }
