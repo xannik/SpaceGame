@@ -1,12 +1,11 @@
-﻿using System.Collections;
+﻿//#define HEALTH_SCRIPT_EXISTS
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthShieldIndicator : MonoBehaviour {
-
-	private int health;
-	private int shield;
 
 	private const float angleOffset = 45.0f; // 0.0f <-> 180.0f
 
@@ -14,17 +13,21 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 	private const int VALUE_MAX = 100;
 
-//	private float t = 0.0f;
-
 	private Transform shieldLeft, shieldRight, healthLeft, healthRight;
 
 	public GameObject shieldTextObject, healthTextObject;
+
+	private Component healthScript;
 
 	private Text shieldText, healthText;
 
 	// Use this for initialization
 	void Start () {
-		health = shield = VALUE_MAX;
+
+		#if HEALTH_SCRIPT_EXISTS
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		healthScript = player.GetComponent<HealthController> ();
+		#endif
 
 		shieldLeft = transform.GetChild (0).GetChild (0);
 		shieldRight = transform.GetChild (1).GetChild (0);
@@ -39,29 +42,28 @@ public class HealthShieldIndicator : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-//		shield = (int)(50 * (1 + Mathf.Cos (t)));
-//		health = (int)(50 * (1 + Mathf.Cos (t+Mathf.PI)));
-//		t += 0.05f;
-
-		if (shield > 0) {
-			shield--;
-		} else if (health > 0) {
-			health--;
-		} else {
-			shield = health = VALUE_MAX;
-		}
-//
 		updateShield ();
 		updateHealth ();
 	}
 
 	private void updateShield () {
+		#if HEALTH_SCRIPT_EXISTS
+		int shield = healthScript.currentShield ();
+		#else
+		int shield = 25;
+		#endif
+
 		shieldText.text = shield.ToString ();
 		setShieldRotation (angleOffset + (VALUE_MAX - shield) * factor);
 	}
 
 	private void updateHealth () {
+		#if HEALTH_SCRIPT_EXISTS
+		int health = healthScript.currentHealth ();
+		#else
+		int health = 75;
+		#endif
+
 		healthText.text = health.ToString ();
 		setHealthRotation (angleOffset + (VALUE_MAX - health) * factor);
 	}
