@@ -6,9 +6,12 @@ public class PlayerShooting : MonoBehaviour {
 
     // Use this for initialization
     public GameObject BulletPreFab;
+    public Transform bulletSpawn;
     public float fireDelay = 0.25f;
-    
-   
+    public int speed = 100;
+    public float timer = 3f;
+
+
     //public GameObject shootspawn;
 
     private float cooldownTimer = 0;
@@ -27,10 +30,10 @@ public class PlayerShooting : MonoBehaviour {
 	}
     void Shoot()
     {
-        Debug.Log("Pew!");
-        cooldownTimer = fireDelay;
-        Instantiate(BulletPreFab, transform.position, transform.rotation);
+       cooldownTimer = fireDelay;
+       GameObject bullet = Instantiate(BulletPreFab, bulletSpawn.position, bulletSpawn.rotation);
+       bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * speed;
 
-
+        Destroy(bullet, timer);
     }
 }

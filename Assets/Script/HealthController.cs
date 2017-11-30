@@ -16,8 +16,8 @@ public class HealthController : MonoBehaviour {
 	}
     public void TakeDamage(int amount)
     {
-     
-        if(currentShield < 0)
+        //Debug.Log("HIIIIIITITITITITITITITIT");
+        if (currentShield < 0)
         {
             currentHealth -= amount;
             if(currentHealth <= 0)
@@ -32,6 +32,7 @@ public class HealthController : MonoBehaviour {
     }
     public void death()
     {
-        Debug.Log("dead");
+        Destroy(gameObject);
+        //Debug.Log("dead");
     }
 }
