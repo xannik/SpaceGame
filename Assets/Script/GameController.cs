@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     public GameObject player = null;
 
     private int wave_counter = 0;
+    private List<GameObject> enemies = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () {
@@ -20,12 +21,14 @@ public class GameController : MonoBehaviour {
 	
     void wavesSpawner()
     {
-        if (wave_counter == 0)
+        enemies.RemoveAll(item => item == null);
+        if (enemies.Count == 0)
         {
             wave_counter++;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < (10 + 5 * wave_counter); i++)
             {
-                GameObject.Instantiate(enemy_prefab, Random.insideUnitSphere * 1000, Random.rotationUniform);
+                GameObject enemy = GameObject.Instantiate(enemy_prefab, Random.insideUnitSphere * 1000, Random.rotationUniform) as GameObject;
+                enemies.Add(enemy);
             }
         }
     }
