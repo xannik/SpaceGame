@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Cursor.visible = false;
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         if (enemy_prefab == null)

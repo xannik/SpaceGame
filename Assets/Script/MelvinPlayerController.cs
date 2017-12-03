@@ -11,7 +11,6 @@ public class MelvinPlayerController : MonoBehaviour {
     public float turnSpeed = 2f;
     public float RotateSpeed = 1.5f;
     public float fireRate = 0.5f;
-    public GameObject shotPrefab;
 
     private float nextFire = 0.0f;
 
@@ -37,17 +36,6 @@ public class MelvinPlayerController : MonoBehaviour {
         speed = (speed > speedMax ? speedMax : (speed < speedMin ? speedMin : speed));
     }
         
-    /*void shoot()
-    {
-        if (Input.GetKey(KeyCode.Space) && Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-            GameObject go = GameObject.Instantiate(shotPrefab, transform.position, transform.rotation) as GameObject;
-            GameObject.Destroy(go, 3f);
-        }
-        
-    }*/
-
     void FixedUpdate()
     {
         changeSpeed();

@@ -7,7 +7,7 @@ public class ApplicationManager : MonoBehaviour {
 
     public void Play()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Melvin");
     }
 
 	public void Quit () 
