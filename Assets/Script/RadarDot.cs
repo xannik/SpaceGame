@@ -7,16 +7,16 @@ public class RadarDot : MonoBehaviour {
 	
 	private const float scale = 0.001f;
 
-	public GameObject player;
 	public GameObject enemy;
+
+	private SwitchCamera switchCamera;
 
 	private float radar_radius;
 
 	void Start () {
-		if (player == null) {
-			
-			player = GameObject.FindGameObjectWithTag("Player");
-		}
+		GameObject cannon = GameObject.FindGameObjectWithTag("Cannon");
+
+		switchCamera = cannon.GetComponent<SwitchCamera> ();
 
 		radar_radius = 0.375f * 200; // GetComponent<RectTransform> ().rect.height;
 	}
@@ -24,15 +24,17 @@ public class RadarDot : MonoBehaviour {
 	void Update () {
 		if (enemy != null) {
 
-			Vector3 direction = enemy.transform.position - player.transform.position;
+			Transform camTransform = switchCamera.currentCamera.transform;
 
-			float rotation = Vector3.SignedAngle (player.transform.forward,
+			Vector3 direction = enemy.transform.position - camTransform.position;
+
+			float rotation = Vector3.SignedAngle (camTransform.forward,
 				                 direction,
-				                 Vector3.Cross (player.transform.forward, direction));
+				                 Vector3.Cross (camTransform.forward, direction));
 
-			float angle = Vector3.SignedAngle (player.transform.right, 
-				              Vector3.ProjectOnPlane (direction, player.transform.forward), 
-				              player.transform.forward);
+			float angle = Vector3.SignedAngle (camTransform.right, 
+				              Vector3.ProjectOnPlane (direction, camTransform.forward), 
+				              camTransform.forward);
 
 			float factor = radar_radius * rotation / 180.0f;
 

@@ -7,15 +7,12 @@ public class TargetBox : MonoBehaviour {
 
 	private const float factor = 0.025f;
 
-	// Use this for initialization
 	void Start () {
 		GameObject cannon = GameObject.FindGameObjectWithTag("Cannon");
 		switchCamera = cannon.GetComponent<SwitchCamera> ();
 	}
 	
-	// Update is called once per frame
 	void Update () {
-//		Camera currentCam = switchCamera.currentCamera;
 
 		Transform camTransform = switchCamera.currentCamera.transform;
 
