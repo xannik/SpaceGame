@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class HealthController : MonoBehaviour {
@@ -32,7 +33,10 @@ public class HealthController : MonoBehaviour {
     }
     public void death()
     {
-        Destroy(gameObject);
+        if (this.tag == "Player")
+            SceneManager.LoadScene("Menu 3D");
+        else
+            Destroy(gameObject);
         //Debug.Log("dead");
     }
 }

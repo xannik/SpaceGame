@@ -10,9 +10,6 @@ public class MelvinPlayerController : MonoBehaviour {
     public float speedMin = 0f;
     public float turnSpeed = 2f;
     public float RotateSpeed = 1.5f;
-    public float fireRate = 0.5f;
-
-    private float nextFire = 0.0f;
 
     void movement()
     {
@@ -40,6 +37,5 @@ public class MelvinPlayerController : MonoBehaviour {
     {
         changeSpeed();
         movement();
-        //shoot();
     }
 }

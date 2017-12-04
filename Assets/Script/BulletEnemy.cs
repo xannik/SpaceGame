@@ -17,7 +17,7 @@ public class BulletEnemy : MonoBehaviour {
         HealthController health = hit.GetComponent<HealthController>();
         //Debug.Log("it's a hit " + hit);
 
-        if (hit.gameObject == player.gameObject)
+        if (hit.gameObject == player.gameObject || hit.tag == "Enemy") // Enemies shoot themself, cannot do "player = GameObject.FindWithTag("Enemy");" 
         {
             //Debug.Log("Ignoring physics");
             Collider[] playerColliders = player.GetComponents<Collider>();
@@ -25,9 +25,9 @@ public class BulletEnemy : MonoBehaviour {
             Physics.IgnoreCollision(hit.GetComponent<CapsuleCollider>(), playerColliders[0], false);
             Physics.IgnoreCollision(hit.GetComponent<CapsuleCollider>(), playerColliders[1], false);
         }
-        if (health != null)
+        else if (health != null)
         {
-
+            Debug.Log("Hit and player: " + hit + " " + player);
             if (health.currentHealth == 0)
             {
                 Destroy(other.gameObject);

@@ -27,8 +27,9 @@ public class GameController : MonoBehaviour {
         {
             wave_counter++;
             for (int i = 0; i < (10 + 5 * wave_counter); i++)
-            {
-                GameObject enemy = GameObject.Instantiate(enemy_prefab, Random.insideUnitSphere * 1000, Random.rotationUniform) as GameObject;
+            //for (int i = 0; i < (wave_counter); i++)
+                {
+                    GameObject enemy = GameObject.Instantiate(enemy_prefab, Random.insideUnitSphere * 1000, Random.rotationUniform) as GameObject;
                 enemies.Add(enemy);
             }
         }

@@ -25,7 +25,7 @@ public class BulletPlayer : MonoBehaviour {
             Physics.IgnoreCollision(hit.GetComponent<CapsuleCollider>(), playerColliders[0], false);
             Physics.IgnoreCollision(hit.GetComponent<CapsuleCollider>(), playerColliders[1], false);
         }
-        if (health != null)
+        else if (health != null)
         {
 
             if (health.currentHealth == 0)
@@ -34,6 +34,7 @@ public class BulletPlayer : MonoBehaviour {
             }
             else
             {
+                Debug.Log("Shoot " + hit);
                 health.TakeDamage(damagePerShot);
                 Destroy(gameObject);
             }
