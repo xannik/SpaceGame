@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchCamera : MonoBehaviour {
+	public Camera currentCamera;
+
 	public Camera spaceShipCamera;
 	public Camera gunCamera;
     public MouseCamera script;
@@ -12,6 +14,8 @@ public class SwitchCamera : MonoBehaviour {
 		gunCamera.enabled = false;
         script = GetComponent<MouseCamera>();
         script.enabled = false;
+
+		currentCamera = spaceShipCamera;
 
     }
 	
@@ -24,6 +28,7 @@ public class SwitchCamera : MonoBehaviour {
             gunCamera.enabled = !gunCamera.enabled;
             script.enabled = !script.enabled;
 
+			currentCamera = gunCamera.enabled ? gunCamera : spaceShipCamera;
         }
        
 	}

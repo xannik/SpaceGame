@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+//using System.Linq;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class RadarBackground : MonoBehaviour {
 
 	private GameObject player;
@@ -11,7 +11,6 @@ public class RadarBackground : MonoBehaviour {
 	private const float t = 1.0f;
 	private const float r = 1.5f;
 
-	// Use this for initialization
 	void Start () {
 		
 		if (player == null) {
@@ -19,16 +18,12 @@ public class RadarBackground : MonoBehaviour {
 			player = GameObject.FindGameObjectWithTag("Player");
 		}
 
-
-		Mesh mesh = transform.GetComponent<MeshFilter> ().sharedMesh;
-//		var mesh = (transform.GetComponent("MeshFilter") as MeshFilter).mesh; // original line, creates runtime error
-
-		mesh.uv = mesh.uv.Select(o => new Vector2(1 - o.x, o.y)).ToArray();
-		mesh.triangles = mesh.triangles.Reverse().ToArray();
-		mesh.normals = mesh.normals.Select(o => -o).ToArray();
+//		Mesh mesh = transform.GetComponent<MeshFilter> ().sharedMesh;
+//		mesh.uv = mesh.uv.Select(o => new Vector2(1 - o.x, o.y)).ToArray();
+//		mesh.triangles = mesh.triangles.Reverse().ToArray();
+//		mesh.normals = mesh.normals.Select(o => -o).ToArray();
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 //		transform.rotation = player.transform.rotation;
 
