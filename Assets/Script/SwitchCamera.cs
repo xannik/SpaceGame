@@ -22,7 +22,7 @@ public class SwitchCamera : MonoBehaviour {
         script.enabled = false;
         rend = gobject.GetComponent<Renderer>();
 		currentCamera = spaceShipCamera;
-        cannon.transform.rotation = Quaternion.Euler(spaceship.transform.rotation.x, spaceship.transform.rotation.y - 180, spaceship.transform.rotation.z);
+        cannon.transform.localRotation = Quaternion.Euler(spaceship.transform.rotation.x, spaceship.transform.rotation.y + 180, spaceship.transform.rotation.z);
         
     }
 	
