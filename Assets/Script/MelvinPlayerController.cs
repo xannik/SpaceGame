@@ -10,6 +10,7 @@ public class MelvinPlayerController : MonoBehaviour {
     public float speedMin = 0f;
     public float turnSpeed = 2f;
     public float RotateSpeed = 1.5f;
+    public GameObject cannon;
 
     void movement()
     {
