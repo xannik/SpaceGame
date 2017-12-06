@@ -16,11 +16,22 @@ public class HighScoreView : MonoBehaviour {
 		hiddenPos = new Vector3 (-1000.0f, 0.0f, 0.0f);
 		hiddenPos += shownPos;
 		hidden = false;
-
 		swap ();
-	}
-	
-	void Update () {
+        
+        names.text = "1st\n2nd\n3rd\n4th\n5th\n6th\n7th\n";
+        
+
+        scores.text = "";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint1") + "\n";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint2") + "\n";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint3") + "\n";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint4") + "\n";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint5") + "\n";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint6") + "\n";
+        scores.text += PlayerPrefs.GetInt("HighScorePoint7") + "\n";
+    }
+
+    void Update () {
 	}
 
 //	public void show () {

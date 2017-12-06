@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayScore : MonoBehaviour {
-
-	public int score;
 	public Text scoreText;
+    public GameObject player = null;
 
 	void Start () {
-		score = 0;
+        if (!player)
+            player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	void Update () {
-		scoreText.text = "Score: " + score;
-
-		score += 999;
+		scoreText.text = "Score: " + player.GetComponent<PlayerPoints>().getScore();
 	}
 }

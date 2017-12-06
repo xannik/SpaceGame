@@ -28,7 +28,6 @@ public class BulletEnemy : MonoBehaviour {
         {
             if (CollisionEffect)
             {
-                Debug.Log("Effect at hit: !" + hit.transform.position + "  transform = " + transform.position);
                 GameObject effect = Instantiate(CollisionEffect, transform.position, transform.rotation);
                 Destroy(effect, 4.5f);
             }

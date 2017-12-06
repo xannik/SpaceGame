@@ -15,7 +15,7 @@ public class BulletPlayer : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         GameObject hit = other.gameObject;
-        HealthController health = hit.GetComponent<HealthController>();
+        HealthController enemy = hit.GetComponent<HealthController>();
         //Debug.Log("it's a hit " + hit);
 
         if (hit.gameObject == player.gameObject)
@@ -26,17 +26,16 @@ public class BulletPlayer : MonoBehaviour {
             Physics.IgnoreCollision(hit.GetComponent<CapsuleCollider>(), playerColliders[0], false);
             Physics.IgnoreCollision(hit.GetComponent<CapsuleCollider>(), playerColliders[1], false);
         }
-        else if (health != null)
+        else if (enemy != null)
         {
-            Debug.Log("Shoot " + hit);
-            Debug.Log("Effect at hit: !" +  hit.transform.position + "  transform = " + transform.position);
-
             if (CollisionEffect)
             {
                 GameObject effect = Instantiate(CollisionEffect, transform.position, transform.rotation);
                 Destroy(effect, 4.5f);
             }
-            health.TakeDamage(damagePerShot);
+            enemy.TakeDamage(damagePerShot);
+            player.GetComponent<PlayerPoints>().addPoint(10);
+
             Destroy(gameObject);
         }
     }

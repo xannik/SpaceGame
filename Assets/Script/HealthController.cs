@@ -50,12 +50,36 @@ public class HealthController : MonoBehaviour {
             currentShield -= amount;
         }
     }
+
+    private void saveScore(int score)
+    {
+        ArrayList array = new ArrayList();
+        for (int i = 1; i < 8; i++)
+        {
+            array.Add(PlayerPrefs.GetInt("HighScorePoint" + i));
+        }
+
+        array.Add(score);
+        array.Sort();
+        array.Reverse();
+
+        Debug.Log(score);
+
+        for (int i = 1; i < 8; i++)
+        {
+            Debug.Log((int)array[i - 1]);
+            array.Add(PlayerPrefs.GetInt("HighScorePoint" + i));
+            PlayerPrefs.SetInt("HighScorePoint" + i, (int)array[i - 1]);
+        }
+    }
+
     public void death()
     {
         if (this.tag == "Player")
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            saveScore(this.GetComponent<PlayerPoints>().getScore());
             SceneManager.LoadScene("Menu 3D");
         }
         else
