@@ -5,20 +5,38 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour {
 
-    public const int maxHealth = 100;
-    public const int maxShield = 100;
+    private const int maxHealth = 100;
+    private const int maxShield = 100;
+    private float lastDamageTake = 0;
+    private float nextShieldIncrease = 0;
+    private int beginShield = 0;
+
+
     public int currentHealth = maxHealth;
     public int currentShield = maxShield;
     public GameObject ExplosionEffect = null;
-    
+
+    void Start()
+    {
+        beginShield = currentShield;
+    }
 
     // Update is called once per frame
     void Update () {
-		    
+
+        if ((Time.time - lastDamageTake) > 3 && beginShield > currentShield)
+        {
+            if (nextShieldIncrease < Time.time)
+            {
+                currentShield += 5;
+                nextShieldIncrease = Time.time + 1;
+            }
+        }
 	}
+
     public void TakeDamage(int amount)
     {
-        //Debug.Log("HIIIIIITITITITITITITITIT");
+        lastDamageTake = Time.time;
         if (currentShield < 0)
         {
             currentHealth -= amount;
@@ -36,7 +54,7 @@ public class HealthController : MonoBehaviour {
     {
         if (this.tag == "Player")
         {
-
+            Cursor.visible = true;
             SceneManager.LoadScene("Menu 3D");
         }
         else
@@ -47,7 +65,6 @@ public class HealthController : MonoBehaviour {
                 Destroy(explosion, 4.5f);
             }
             Destroy(gameObject);
-        } 
-        //Debug.Log("dead");
+        }
     }
 }
