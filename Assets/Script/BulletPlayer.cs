@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BulletPlayer : MonoBehaviour {
     
-    public int damagePerShot = 20;
+    public int damagePerShot = 5;
     GameObject player;
-   
+    public GameObject CollisionEffect = null;
+
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
@@ -27,19 +28,16 @@ public class BulletPlayer : MonoBehaviour {
         }
         else if (health != null)
         {
+            Debug.Log("Shoot " + hit);
+            Debug.Log("Effect at hit: !" +  hit.transform.position + "  transform = " + transform.position);
 
-            if (health.currentHealth == 0)
+            if (CollisionEffect)
             {
-                Destroy(other.gameObject);
+                GameObject effect = Instantiate(CollisionEffect, transform.position, transform.rotation);
+                Destroy(effect, 4.5f);
             }
-            else
-            {
-                Debug.Log("Shoot " + hit);
-                health.TakeDamage(damagePerShot);
-                Destroy(gameObject);
-            }
-
-
+            health.TakeDamage(damagePerShot);
+            Destroy(gameObject);
         }
     }
    

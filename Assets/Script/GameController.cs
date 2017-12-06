@@ -26,12 +26,11 @@ public class GameController : MonoBehaviour {
         if (enemies.Count == 0)
         {
             wave_counter++;
-            for (int i = 0; i < (10 + 5 * wave_counter); i++)
-            //for (int i = 0; i < (wave_counter); i++)
+            for (int i = 0; i < (3 * wave_counter); i++)
                 {
                     GameObject enemy = GameObject.Instantiate(enemy_prefab, Random.insideUnitSphere * 1000, Random.rotationUniform) as GameObject;
-                enemies.Add(enemy);
-            }
+                    enemies.Add(enemy);
+                }
         }
     }
 

@@ -9,6 +9,7 @@ public class HealthController : MonoBehaviour {
     public const int maxShield = 100;
     public int currentHealth = maxHealth;
     public int currentShield = maxShield;
+    public GameObject ExplosionEffect = null;
     
 
     // Update is called once per frame
@@ -34,9 +35,19 @@ public class HealthController : MonoBehaviour {
     public void death()
     {
         if (this.tag == "Player")
+        {
+
             SceneManager.LoadScene("Menu 3D");
+        }
         else
+        {
+            if (ExplosionEffect)
+            {
+                GameObject explosion = Instantiate(ExplosionEffect, transform.position, transform.rotation);
+                Destroy(explosion, 4.5f);
+            }
             Destroy(gameObject);
+        } 
         //Debug.Log("dead");
     }
 }

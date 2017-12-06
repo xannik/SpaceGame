@@ -22,7 +22,7 @@ public class RadarDot : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (enemy != null) {
+		if (enemy != null && switchCamera && switchCamera.currentCamera) {
 
 			Transform camTransform = switchCamera.currentCamera.transform;
 
