@@ -55,6 +55,7 @@ public class HealthController : MonoBehaviour {
         if (this.tag == "Player")
         {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("Menu 3D");
         }
         else
