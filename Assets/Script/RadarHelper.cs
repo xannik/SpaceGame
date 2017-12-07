@@ -6,13 +6,13 @@ public class RadarHelper : MonoBehaviour {
 
 	private GameObject enemyDot;
 
+	public GameObject template;
+
 	// Use this for initialization
 	void Start () {
 		GameObject radar = GameObject.FindGameObjectWithTag("Radar");
 
-		GameObject templateDot = radar.transform.GetChild (0).gameObject;
-
-		enemyDot = Object.Instantiate<GameObject> (templateDot,radar.transform);
+		enemyDot = Object.Instantiate<GameObject> (template,radar.transform);
 
 		enemyDot.GetComponent<RadarDot> ().enemy = gameObject;
 	}
