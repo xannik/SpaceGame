@@ -20,7 +20,7 @@ public class MouseCamera : MonoBehaviour {
     public void reset ()
     {
         T = transform.GetComponentInParent<Transform>();
-        Debug.Log("T: " + T);
+        //Debug.Log("T: " + T);
         Vector3 rot = T.localEulerAngles;
 
         transform.rotation = T.localRotation;

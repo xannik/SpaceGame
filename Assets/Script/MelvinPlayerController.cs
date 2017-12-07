@@ -34,7 +34,7 @@ public class MelvinPlayerController : MonoBehaviour {
             speed -= speedChange * Time.deltaTime;
 
         speed = (speed > speedMax ? speedMax : (speed < speedMin ? speedMin : speed));
-        Debug.Log(speed);
+        //Debug.Log(speed);
     }
         
     void FixedUpdate()
