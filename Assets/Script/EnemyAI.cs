@@ -78,7 +78,9 @@ public class EnemyAI : MonoBehaviour {
             raycastOffset -= Vector3.up;
 
         if (raycastOffset != Vector3.zero)
+        {
             transform.Rotate(raycastOffset * 10f * Time.deltaTime);
+        }
         else
             rotateToPlayer();
 
