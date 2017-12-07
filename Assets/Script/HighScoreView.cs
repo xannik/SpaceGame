@@ -19,16 +19,12 @@ public class HighScoreView : MonoBehaviour {
 		swap ();
         
         names.text = "1st\n2nd\n3rd\n4th\n5th\n6th\n7th\n";
-        
 
         scores.text = "";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint1") + "\n";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint2") + "\n";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint3") + "\n";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint4") + "\n";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint5") + "\n";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint6") + "\n";
-        scores.text += PlayerPrefs.GetInt("HighScorePoint7") + "\n";
+        for (int i = 1; i < 8; i++)
+        {
+            scores.text += PlayerPrefs.GetInt("HighScorePoint" + i) + "\n";
+        }
     }
 
     void Update () {

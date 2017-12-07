@@ -63,7 +63,6 @@ public class HealthController : MonoBehaviour {
         array.Sort();
         array.Reverse();
 
-        Debug.Log(score);
 
         for (int i = 1; i < 8; i++)
         {
