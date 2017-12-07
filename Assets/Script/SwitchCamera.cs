@@ -55,18 +55,19 @@ public class SwitchCamera : MonoBehaviour {
                 
                 Cursor.lockState = CursorLockMode.None;
             }
+
+
             cannon.transform.localRotation = Quaternion.Euler(angle.x, (angle.y + 180) % 360, angle.z);
-            
-            
             script.enabled = !script.enabled;
-            
+            if (script.enabled == true)
+                script.reset();
+
 			currentCamera = gunCamera.enabled ? gunCamera : spaceShipCamera;
         }
        
 	}
     void activateJet(bool value)
     {
-            Debug.Log(value);
             foreach (GameObject e in jets)
             {
                 e.SetActive(value);

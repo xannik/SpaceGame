@@ -6,7 +6,7 @@ public class MelvinPlayerController : MonoBehaviour {
 
     public float speed = 10f;
     public float speedChange = 10f;
-    public float speedMax = 300f;
+    public float speedMax = 70f;
     public float speedMin = 0f;
     public float turnSpeed = 2f;
     public float RotateSpeed = 1.5f;
@@ -27,15 +27,24 @@ public class MelvinPlayerController : MonoBehaviour {
     void changeSpeed()
     {
         if (Input.GetKey(KeyCode.LeftShift))
+        {
             speed += speedChange * Time.deltaTime;
+        }
         else
             speed -= speedChange * Time.deltaTime;
+
         speed = (speed > speedMax ? speedMax : (speed < speedMin ? speedMin : speed));
+        Debug.Log(speed);
     }
         
     void FixedUpdate()
     {
         changeSpeed();
         movement();
+    }
+
+    public Vector3 getDirection ()
+    {
+        return transform.rotation.eulerAngles;
     }
 }

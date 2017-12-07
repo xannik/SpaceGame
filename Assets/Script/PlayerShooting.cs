@@ -10,6 +10,7 @@ public class PlayerShooting : MonoBehaviour {
     public float fireDelay = 0.25f;
     public int speed = 100;
     public float timer = 3f;
+    public MelvinPlayerController spaceship;
 
 
     //public GameObject shootspawn;
@@ -32,8 +33,12 @@ public class PlayerShooting : MonoBehaviour {
     {
        cooldownTimer = fireDelay;
        GameObject bullet = Instantiate(BulletPreFab, bulletSpawn.position, bulletSpawn.rotation);
-       bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * speed;
 
-        Destroy(bullet, timer);
+        /*Vector3 shotOffset = spaceship.getDirection();
+        shotOffset *= spaceship.speed;*/
+
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * speed; //+ shotOffset;
+       
+       Destroy(bullet, timer);
     }
 }
