@@ -37,7 +37,7 @@ public class HealthController : MonoBehaviour {
     public void TakeDamage(int amount)
     {
         lastDamageTake = Time.time;
-        if (currentShield < 0)
+        if (currentShield <= 0)
         {
             currentHealth -= amount;
             if(currentHealth <= 0)
